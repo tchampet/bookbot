@@ -1,5 +1,5 @@
 from stats import word_count, num_each_character, from_dict_to_sorted_list_of_dict
-
+import sys
 
 def get_book_text(filepath):
     with open(filepath) as file:
@@ -7,7 +7,14 @@ def get_book_text(filepath):
     return text 
 
 def main():
-    book = get_book_text("./books/frankenstein.txt")
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    else:
+        book_path = sys.argv[1]
+    
+    book = get_book_text(book_path)
+
     char_count_dict = num_each_character(book)
 
     nb_words = word_count(book)
